@@ -25,6 +25,7 @@ sessions/
 playwright/.cache/
 playwright-report/
 test-results/
+data/bookmarks.json
 
 # OS / editor
 .DS_Store
