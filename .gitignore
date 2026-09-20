@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Firebase / service account keys
+firebase-key-*.json
+*-firebase-adminsdk-*.json
+service-account*.json
+
+# Nuxt
+.nuxt/
+.output/
+dist/
+
+# Logs
+*.log
+
+# Browser/session data
+storage-state/
+sessions/
+playwright/.cache/
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Coverage / caches
+coverage/
+.cache/
+tmp/
+temp/
