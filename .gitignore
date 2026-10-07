@@ -6,25 +6,42 @@ node_modules/
 .env.*
 !.env.example
 
-# Firebase / service account keys
+
+# Temporary files
+**/tmp-*
+
+# Firebase / service account keys (legacy, being retired)
 firebase-key-*.json
 *-firebase-adminsdk-*.json
 service-account*.json
 
-# Nuxt
+# Build output
 .nuxt/
 .output/
 dist/
+build/
+*.tsbuildinfo
 
 # Logs
+logs/
 *.log
 
-# Browser/session data
+# Browser / X session state — CREDENTIAL-ADJACENT, never commit
 storage-state/
 sessions/
+.x-sessions/
+user-data-dir/
 playwright/.cache/
 playwright-report/
 test-results/
+*.storagestate.json
+
+# Scraper debug artifacts (may contain personal content)
+debug/
+screenshots/
+traces/
+
+# Legacy local data dump
 data/bookmarks.json
 
 # OS / editor
