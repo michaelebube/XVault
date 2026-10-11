@@ -34,7 +34,7 @@ function openEdit(category: Category): void {
   <div class="flex h-full flex-col">
     <div class="flex items-center gap-2.5 px-4 py-4">
       <span
-        class="flex size-7 items-center justify-center rounded-control bg-accent text-[13px] font-bold text-accent-ink"
+        class="brand-mark size-7 text-[13px]"
         aria-hidden="true"
       >
         X
@@ -48,7 +48,7 @@ function openEdit(category: Category): void {
         class="flex items-center gap-2.5 rounded-button px-2.5 py-1.5 text-[14px] transition-colors"
         :class="
           activeCategory === null && !route.query.pending
-            ? 'bg-accent-subtle font-medium text-accent'
+            ? 'bg-accent-subtle font-medium text-ink'
             : 'text-ink-secondary hover:bg-surface-subtle hover:text-ink'
         "
         @click="emit('navigate')"
@@ -63,7 +63,7 @@ function openEdit(category: Category): void {
         class="mt-0.5 flex items-center gap-2.5 rounded-button px-2.5 py-1.5 text-[14px] transition-colors"
         :class="
           activeCategory === 'none'
-            ? 'bg-accent-subtle font-medium text-accent'
+            ? 'bg-accent-subtle font-medium text-ink'
             : 'text-ink-secondary hover:bg-surface-subtle hover:text-ink'
         "
         @click="emit('navigate')"
@@ -108,7 +108,7 @@ function openEdit(category: Category): void {
             class="flex min-w-0 flex-1 items-center gap-2.5 rounded-button px-2.5 py-1.5 text-[14px] transition-colors"
             :class="
               activeCategory === category.id
-                ? 'bg-accent-subtle font-medium text-accent'
+                ? 'bg-accent-subtle font-medium text-ink'
                 : 'text-ink-secondary hover:bg-surface-subtle hover:text-ink'
             "
             @click="emit('navigate')"

@@ -69,7 +69,7 @@ async function signOut(): Promise<void> {
               class="flex flex-1 items-center justify-center gap-1.5 rounded-control border px-2 py-1 text-[12px] transition-colors"
               :class="
                 preference === option.value
-                  ? 'border-accent bg-accent-subtle text-accent'
+                  ? 'border-line-strong bg-accent-subtle text-ink'
                   : 'border-line text-ink-secondary hover:border-line-strong hover:text-ink'
               "
               :aria-pressed="preference === option.value"

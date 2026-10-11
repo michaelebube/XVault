@@ -74,7 +74,7 @@ async function createAndAssign(): Promise<void> {
       :class="
         modelValue
           ? categoryChip(modelValue.color)
-          : 'border border-dashed border-line-strong text-ink-muted hover:border-accent hover:text-accent'
+          : 'border border-dashed border-line-strong text-ink-muted hover:border-ink hover:text-ink'
       "
       :aria-expanded="open"
       aria-haspopup="listbox"
@@ -130,7 +130,7 @@ async function createAndAssign(): Promise<void> {
           >
             <span class="size-1.5 rounded-full border border-line-strong" />
             <span class="flex-1">Uncategorized</span>
-            <AppIcon v-if="modelValue === null" name="check" :size="14" class="text-accent" />
+            <AppIcon v-if="modelValue === null" name="check" :size="14" class="text-ink" />
           </button>
 
           <button
@@ -148,7 +148,7 @@ async function createAndAssign(): Promise<void> {
               v-if="modelValue?.id === category.id"
               name="check"
               :size="14"
-              class="text-accent"
+              class="text-ink"
             />
           </button>
 
@@ -163,7 +163,7 @@ async function createAndAssign(): Promise<void> {
         <button
           v-if="canCreate"
           type="button"
-          class="flex w-full items-center gap-2 border-t border-line px-3 py-2 text-left text-sm text-accent transition-colors hover:bg-accent-subtle disabled:opacity-60"
+          class="flex w-full items-center gap-2 border-t border-line px-3 py-2 text-left text-sm font-medium text-ink transition-colors hover:bg-accent-subtle disabled:opacity-60"
           :disabled="creating"
           @click="createAndAssign"
         >

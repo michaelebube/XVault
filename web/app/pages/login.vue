@@ -94,7 +94,7 @@ async function submit(): Promise<void> {
 
     <p class="mt-5 border-t border-line pt-4 text-[13px] text-ink-secondary">
       Have an invite code?
-      <NuxtLink to="/register" class="font-medium text-accent hover:underline">
+      <NuxtLink to="/register" class="font-medium text-ink hover:underline">
         Create your account
       </NuxtLink>
     </p>

@@ -29,10 +29,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="min-h-dvh bg-bg">
+  <div class="min-h-dvh bg-bg text-ink">
     <!-- Desktop sidebar -->
     <aside
-      class="fixed inset-y-0 left-0 z-20 hidden w-60 border-r border-line bg-surface-subtle lg:block"
+      class="fixed inset-y-0 left-0 z-20 hidden w-60 border-r border-line bg-surface/85 backdrop-blur lg:block"
     >
       <AppSidebar />
     </aside>
@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
     >
       <aside
         v-if="drawerOpen"
-        class="fixed inset-y-0 left-0 z-40 w-[17rem] border-r border-line bg-surface-subtle lg:hidden"
+        class="fixed inset-y-0 left-0 z-40 w-[17rem] border-r border-line bg-surface lg:hidden"
       >
         <AppSidebar @navigate="drawerOpen = false" />
       </aside>
@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
 
     <div class="lg:pl-60">
       <AppTopbar @open-nav="drawerOpen = true" />
-      <main class="mx-auto w-full max-w-3xl px-4 pb-20 pt-5 sm:px-6">
+      <main class="mx-auto w-full max-w-4xl px-4 pb-20 pt-6 sm:px-6 lg:px-8">
         <slot />
       </main>
     </div>

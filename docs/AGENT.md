@@ -10,7 +10,7 @@ If anything in this document conflicts with the existing codebase, do not silent
 
 # 1. Project Overview
 
-This is a personal Twitter/X bookmark archiving and organization application.
+This is a personal Twitter/X bookmark archiving and organization application titled XVault
 
 The application periodically retrieves the user's X bookmarks, permanently archives the content and media, and provides a searchable interface for organizing the archive into custom categories.
 

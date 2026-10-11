@@ -55,7 +55,7 @@ async function syncNow(): Promise<void> {
       <span class="relative flex size-1.5 shrink-0">
         <span
           v-if="isRunning"
-          class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75"
+          class="absolute inline-flex size-full animate-ping rounded-full bg-info opacity-75"
         />
         <span
           class="relative inline-flex size-1.5 rounded-full"

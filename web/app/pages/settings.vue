@@ -54,8 +54,8 @@ const healthView = computed(() => {
     case 'syncing':
       return {
         label: 'Syncing',
-        tone: 'text-accent',
-        dot: 'bg-accent',
+        tone: 'text-info',
+        dot: 'bg-info',
         body: 'Reading your bookmarks now. New ones appear as they are archived.',
       };
     case 'needs_attention':
@@ -271,7 +271,7 @@ function inviteState(invite: Invite): { label: string; tone: string } {
             <span class="relative flex size-1.5 shrink-0">
               <span
                 v-if="isRunning"
-                class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75"
+                class="absolute inline-flex size-full animate-ping rounded-full bg-info opacity-75"
               />
               <span class="relative inline-flex size-1.5 rounded-full" :class="healthView.dot" />
             </span>
@@ -505,7 +505,7 @@ function inviteState(invite: Invite): { label: string; tone: string } {
 
       <div class="mt-3 flex items-center gap-3">
         <span
-          class="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-subtle text-[13px] font-semibold text-accent"
+          class="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-subtle text-[13px] font-semibold text-ink"
           aria-hidden="true"
         >
           {{ initials(user?.displayName) }}
@@ -592,10 +592,10 @@ function inviteState(invite: Invite): { label: string; tone: string } {
       <!-- Shown once, never again: only the digest is stored server-side. -->
       <div
         v-if="freshInvite"
-        class="mt-4 rounded-card border border-accent/40 bg-accent-subtle p-3.5 animate-fade-up"
+        class="mt-4 rounded-card border border-line-strong bg-accent-subtle p-3.5 animate-fade-up"
       >
         <div class="flex items-start gap-2">
-          <AppIcon name="check" :size="15" class="mt-0.5 shrink-0 text-accent" />
+          <AppIcon name="check" :size="15" class="mt-0.5 shrink-0 text-ink" />
           <div class="min-w-0 flex-1">
             <p class="text-[13px] font-medium text-ink">
               Copy this code now — it cannot be shown again.
@@ -618,7 +618,7 @@ function inviteState(invite: Invite): { label: string; tone: string } {
             <button
               v-if="inviteLink"
               type="button"
-              class="mt-2 text-[12px] text-accent hover:underline"
+              class="mt-2 text-[12px] font-medium text-ink hover:underline"
               @click="copy(inviteLink, 'Invite link')"
             >
               Copy sign-up link instead

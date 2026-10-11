@@ -10,7 +10,7 @@ import type { Bookmark } from '~/types/api';
  * place, so filing something never reshuffles the list under the user's cursor.
  */
 const { filters, patch, clear, activeFilterCount } = useLibraryQuery();
-const { byId, ensureLoaded } = useCategories();
+const { categories, uncategorizedCount, loaded: categoriesLoaded, byId, ensureLoaded } = useCategories();
 const { status } = useSync();
 
 const {
@@ -36,6 +36,8 @@ const categoryName = computed(() => {
   if (!id || id === 'none') return null;
   return byId.value.get(id)?.name ?? null;
 });
+
+const activeCategoryId = computed(() => filters.value.categoryId ?? null);
 
 /** Which empty state is the honest one for the current query. */
 const emptyKind = computed(() => {
@@ -107,6 +109,53 @@ function onRemoved(id: string): void {
         Fix
       </NuxtLink>
     </div>
+
+    <nav
+      v-if="categoriesLoaded"
+      class="-mx-4 mb-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0"
+      aria-label="Category filters"
+    >
+      <button
+        type="button"
+        class="shrink-0 rounded-full border px-3 py-1.5 text-[13px] font-medium transition-colors"
+        :class="
+          activeCategoryId === null
+            ? 'border-line-strong bg-accent text-accent-ink'
+            : 'border-line bg-surface text-ink-secondary hover:border-line-strong hover:text-ink'
+        "
+        @click="patch({ category: undefined })"
+      >
+        All
+      </button>
+      <button
+        type="button"
+        class="shrink-0 rounded-full border px-3 py-1.5 text-[13px] font-medium transition-colors"
+        :class="
+          activeCategoryId === 'none'
+            ? 'border-line-strong bg-accent text-accent-ink'
+            : 'border-line bg-surface text-ink-secondary hover:border-line-strong hover:text-ink'
+        "
+        @click="patch({ category: 'none' })"
+      >
+        Uncategorized
+        <span class="ml-1 font-mono text-[11px] opacity-70">{{ uncategorizedCount }}</span>
+      </button>
+      <button
+        v-for="category in categories"
+        :key="category.id"
+        type="button"
+        class="shrink-0 rounded-full border px-3 py-1.5 text-[13px] font-medium transition-colors"
+        :class="
+          activeCategoryId === category.id
+            ? 'border-line-strong bg-accent text-accent-ink'
+            : 'border-line bg-surface text-ink-secondary hover:border-line-strong hover:text-ink'
+        "
+        @click="patch({ category: category.id })"
+      >
+        {{ category.name }}
+        <span class="ml-1 font-mono text-[11px] opacity-70">{{ category.bookmarkCount }}</span>
+      </button>
+    </nav>
 
     <!-- Result meta. Quiet by design: it reports, it does not decorate. -->
     <div class="mb-3 flex min-h-6 items-center gap-3">

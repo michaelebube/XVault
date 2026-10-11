@@ -13,7 +13,7 @@ const isEdit = computed(() => Boolean(props.category));
 
 const name = ref(props.category?.name ?? '');
 const description = ref(props.category?.description ?? '');
-const color = ref<CategoryColor>(props.category?.color ?? 'indigo');
+const color = ref<CategoryColor>(props.category?.color ?? 'neutral');
 const saving = ref(false);
 const confirmingDelete = ref(false);
 const error = ref<string | null>(null);
@@ -106,7 +106,7 @@ async function destroy(): Promise<void> {
             type="button"
             class="flex size-7 items-center justify-center rounded-control border transition-colors"
             :class="
-              color === option ? 'border-accent bg-accent-subtle' : 'border-line hover:border-line-strong'
+              color === option ? 'border-line-strong bg-accent-subtle' : 'border-line hover:border-line-strong'
             "
             :aria-label="option"
             :aria-pressed="color === option"

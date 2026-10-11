@@ -41,7 +41,7 @@ const confidence = computed(() =>
           <span class="truncate">{{ name }}</span>
           <span
             v-if="isNew"
-            class="rounded-full bg-accent-subtle px-1.5 py-0.5 text-[10px] font-medium text-accent"
+            class="rounded-full bg-accent-subtle px-1.5 py-0.5 text-[10px] font-medium text-ink"
           >
             new
           </span>

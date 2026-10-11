@@ -10,12 +10,12 @@
 </script>
 
 <template>
-  <div class="flex min-h-dvh flex-col bg-bg">
+  <div class="flex min-h-dvh flex-col bg-bg text-ink">
     <main class="flex flex-1 items-center justify-center px-4 py-12">
       <div class="w-full max-w-sm">
         <div class="mb-7 flex items-center gap-2.5">
           <span
-            class="flex size-8 items-center justify-center rounded-control bg-accent text-[14px] font-bold text-accent-ink"
+            class="brand-mark size-8 text-[14px]"
             aria-hidden="true"
           >
             X

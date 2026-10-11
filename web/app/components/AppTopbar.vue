@@ -99,9 +99,9 @@ onBeforeUnmount(() => {
 
 <template>
   <header
-    class="sticky top-0 z-20 border-b border-line bg-bg/85 backdrop-blur supports-[backdrop-filter]:bg-bg/70"
+    class="sticky top-0 z-20 border-b border-line bg-bg/90 backdrop-blur supports-[backdrop-filter]:bg-bg/75"
   >
-    <div class="mx-auto flex w-full max-w-3xl items-center gap-2 px-4 py-3 sm:px-6">
+    <div class="mx-auto flex w-full max-w-4xl items-center gap-2 px-4 py-3 sm:px-6 lg:px-8">
       <button
         type="button"
         class="rounded-control p-1.5 text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink lg:hidden"
@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
             type="button"
             data-popover-trigger
             class="btn btn-secondary px-2 py-1.5"
-            :class="activeFilterCount ? 'border-accent text-accent' : ''"
+            :class="activeFilterCount ? 'border-line-strong bg-accent-subtle text-ink' : ''"
             :aria-expanded="filtersOpen"
             aria-label="Filters"
             @click="toggleFilters()"
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
               >
                 <AppIcon name="image" :size="15" class="text-ink-muted" />
                 <span class="flex-1">Has media</span>
-                <AppIcon v-if="filters.hasMedia" name="check" :size="14" class="text-accent" />
+                <AppIcon v-if="filters.hasMedia" name="check" :size="14" class="text-ink" />
               </button>
               <button
                 type="button"
@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
               >
                 <AppIcon name="link" :size="15" class="text-ink-muted" />
                 <span class="flex-1">Has links</span>
-                <AppIcon v-if="filters.hasLinks" name="check" :size="14" class="text-accent" />
+                <AppIcon v-if="filters.hasLinks" name="check" :size="14" class="text-ink" />
               </button>
               <button
                 type="button"
@@ -194,7 +194,7 @@ onBeforeUnmount(() => {
                   v-if="filters.pendingSuggestion"
                   name="check"
                   :size="14"
-                  class="text-accent"
+                  class="text-ink"
                 />
               </button>
 
@@ -214,7 +214,7 @@ onBeforeUnmount(() => {
                   v-if="filters.source === option.value"
                   name="check"
                   :size="14"
-                  class="text-accent"
+                  class="text-ink"
                 />
               </button>
 
@@ -280,7 +280,7 @@ onBeforeUnmount(() => {
                   v-if="filters.sort === option.value"
                   name="check"
                   :size="14"
-                  class="text-accent"
+                  class="text-ink"
                 />
               </button>
             </div>

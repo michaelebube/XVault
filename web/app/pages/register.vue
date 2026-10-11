@@ -130,7 +130,7 @@ async function submit(): Promise<void> {
 
     <p class="mt-5 border-t border-line pt-4 text-[13px] text-ink-secondary">
       Already have an account?
-      <NuxtLink to="/login" class="font-medium text-accent hover:underline">Sign in</NuxtLink>
+      <NuxtLink to="/login" class="font-medium text-ink hover:underline">Sign in</NuxtLink>
     </p>
   </div>
 </template>

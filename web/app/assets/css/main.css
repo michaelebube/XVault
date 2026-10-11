@@ -12,44 +12,44 @@
  * semantic token, never the hex.
  */
 :root {
-  --bg: #fafaf8;
+  --bg: #fbfaf7;
   --surface: #ffffff;
-  --surface-subtle: #f5f5f2;
+  --surface-subtle: #f4f2ed;
   --surface-elevated: #ffffff;
-  --line: #e7e5e1;
-  --line-strong: #d6d3ce;
-  --ink: #18181b;
-  --ink-secondary: #52525b;
-  --ink-muted: #71717a;
-  --accent: #6d5dfb;
-  --accent-hover: #5b4ae8;
-  --accent-subtle: #eeebff;
+  --line: #e8e3da;
+  --line-strong: #d3ccbf;
+  --ink: #171717;
+  --ink-secondary: #56524b;
+  --ink-muted: #7d776d;
+  --accent: #171717;
+  --accent-hover: #2c2a27;
+  --accent-subtle: #ece8df;
   --accent-ink: #ffffff;
   --success: #2f9e72;
   --warning: #d89a3d;
   --error: #d85c5c;
   --info: #4f8cc9;
 
-  --shadow-card: 0 1px 2px rgb(24 24 27 / 0.04);
-  --shadow-pop: 0 10px 30px -12px rgb(24 24 27 / 0.22), 0 2px 8px -4px rgb(24 24 27 / 0.1);
+  --shadow-card: 0 1px 2px rgb(23 23 23 / 0.035);
+  --shadow-pop: 0 18px 40px -24px rgb(23 23 23 / 0.28), 0 2px 8px -6px rgb(23 23 23 / 0.16);
 
   color-scheme: light;
 }
 
 .dark {
-  --bg: #101011;
-  --surface: #171719;
-  --surface-subtle: #141416;
-  --surface-elevated: #1d1d20;
-  --line: #2a2a2e;
-  --line-strong: #3a3a40;
-  --ink: #f4f4f5;
-  --ink-secondary: #a1a1aa;
-  --ink-muted: #71717a;
-  --accent: #8b7cff;
-  --accent-hover: #a397ff;
-  --accent-subtle: #26213f;
-  --accent-ink: #101011;
+  --bg: #10100f;
+  --surface: #171614;
+  --surface-subtle: #1d1b18;
+  --surface-elevated: #201f1c;
+  --line: #2d2a25;
+  --line-strong: #403c34;
+  --ink: #f5f3ef;
+  --ink-secondary: #b7b0a5;
+  --ink-muted: #827b70;
+  --accent: #f5f3ef;
+  --accent-hover: #ffffff;
+  --accent-subtle: #2a2722;
+  --accent-ink: #11100f;
   --success: #3bb083;
   --warning: #e0a94f;
   --error: #e56f6f;
@@ -96,7 +96,7 @@
   --shadow-card: var(--shadow-card);
   --shadow-pop: var(--shadow-pop);
 
-  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "XVault Sans", "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, monospace;
 }
 
@@ -168,6 +168,11 @@
 
   .card {
     @apply rounded-[var(--radius-card)] border border-line bg-surface shadow-[var(--shadow-card)];
+  }
+
+  .brand-mark {
+    @apply inline-flex items-center justify-center rounded-control border border-line-strong bg-ink
+      font-semibold text-accent-ink shadow-[var(--shadow-card)] dark:bg-ink dark:text-accent-ink;
   }
 }
 

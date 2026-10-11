@@ -16,40 +16,40 @@ interface ColorClasses {
 
 const PALETTE: Record<CategoryColor, ColorClasses> = {
   neutral: {
-    dot: 'bg-zinc-400 dark:bg-zinc-500',
-    chip: 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
+    dot: 'bg-stone-400 dark:bg-stone-500',
+    chip: 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300',
   },
   indigo: {
-    dot: 'bg-indigo-500',
-    chip: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300',
+    dot: 'bg-neutral-500',
+    chip: 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300',
   },
   violet: {
-    dot: 'bg-violet-500',
-    chip: 'bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
+    dot: 'bg-stone-600',
+    chip: 'bg-stone-100 text-stone-800 dark:bg-stone-800 dark:text-stone-200',
   },
   blue: {
-    dot: 'bg-blue-500',
-    chip: 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
+    dot: 'bg-slate-500',
+    chip: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
   },
   teal: {
-    dot: 'bg-teal-500',
-    chip: 'bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300',
+    dot: 'bg-zinc-500',
+    chip: 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
   },
   green: {
-    dot: 'bg-emerald-500',
-    chip: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
+    dot: 'bg-stone-500',
+    chip: 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300',
   },
   amber: {
-    dot: 'bg-amber-500',
-    chip: 'bg-amber-50 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
+    dot: 'bg-amber-700',
+    chip: 'bg-amber-50 text-amber-900 dark:bg-amber-950 dark:text-amber-200',
   },
   orange: {
-    dot: 'bg-orange-500',
-    chip: 'bg-orange-50 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
+    dot: 'bg-stone-700',
+    chip: 'bg-stone-100 text-stone-800 dark:bg-stone-900 dark:text-stone-200',
   },
   rose: {
-    dot: 'bg-rose-500',
-    chip: 'bg-rose-50 text-rose-700 dark:bg-rose-950 dark:text-rose-300',
+    dot: 'bg-neutral-700',
+    chip: 'bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200',
   },
 };
 
