@@ -19,7 +19,7 @@ export function useSync() {
   async function refresh(): Promise<SyncStatus | null> {
     pending.value = true;
     try {
-      status.value = await api.get<SyncStatus>('/sync/status');
+      status.value = await api.get<SyncStatus>('api/sync/status');
       error.value = null;
       return status.value;
     } catch (err) {

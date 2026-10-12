@@ -29,7 +29,7 @@ export function useLibrary() {
     error.value = null;
 
     try {
-      const data = await api.get<BookmarkListResponse>('/bookmarks', {
+      const data = await api.get<BookmarkListResponse>('api/bookmarks', {
         ...(query.q ? { q: query.q } : {}),
         ...(query.categoryId ? { categoryId: query.categoryId } : {}),
         ...(query.author ? { author: query.author } : {}),

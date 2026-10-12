@@ -21,7 +21,7 @@ export function useCategories() {
     pending.value = true;
     error.value = null;
     try {
-      const data = await api.get<CategoryListResponse>('/categories');
+      const data = await api.get<CategoryListResponse>('api/categories');
       categories.value = data.categories;
       uncategorizedCount.value = data.uncategorizedCount;
       loaded.value = true;
