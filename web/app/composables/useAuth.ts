@@ -19,11 +19,11 @@ export function useAuth() {
   }
 
   async function login(email: string, password: string): Promise<void> {
-    adopt(await api.post<AuthResponse>('/auth/login', { email, password }));
+    adopt(await api.post<AuthResponse>('/api/auth/login', { email, password }));
   }
 
   async function register(input: RegisterInput): Promise<void> {
-    adopt(await api.post<AuthResponse>('/auth/register', { ...input }));
+    adopt(await api.post<AuthResponse>('/api/auth/register', { ...input }));
   }
 
   async function logout(): Promise<void> {
@@ -31,7 +31,7 @@ export function useAuth() {
       // Revokes the refresh family server-side and clears the cookie. If it
       // fails we still drop the local session — a logout must never appear to
       // have failed from the user's side.
-      await api.post('/auth/logout');
+      await api.post('/api/auth/logout');
     } finally {
       clearSession();
       await navigateTo('/login');
