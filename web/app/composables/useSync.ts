@@ -37,7 +37,7 @@ export function useSync() {
   async function trigger(fullScan = false): Promise<boolean> {
     triggering.value = true;
     try {
-      await api.post<{ queued: boolean; jobId: string | null }>('/sync/run', { fullScan });
+      await api.post<{ queued: boolean; jobId: string | null }>('api/sync/run', { fullScan });
       await refresh();
       return true;
     } catch (err) {

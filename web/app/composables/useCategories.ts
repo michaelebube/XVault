@@ -41,7 +41,7 @@ export function useCategories() {
     color?: CategoryColor;
     description?: string;
   }): Promise<Category> {
-    const { category } = await api.post<{ category: Category }>('/categories', { ...input });
+    const { category } = await api.post<{ category: Category }>('/api/categories', { ...input });
     categories.value = [...categories.value, category].sort((a, b) =>
       a.name.localeCompare(b.name),
     );
@@ -52,7 +52,7 @@ export function useCategories() {
     id: string,
     patch: { name?: string; color?: CategoryColor; description?: string },
   ): Promise<Category> {
-    const { category } = await api.patch<{ category: Category }>(`/categories/${id}`, {
+    const { category } = await api.patch<{ category: Category }>(`/api/categories/${id}`, {
       ...patch,
     });
     categories.value = categories.value
@@ -64,7 +64,7 @@ export function useCategories() {
   /** Deleting a category never deletes bookmarks — they fall back to uncategorized. */
   async function remove(id: string): Promise<number> {
     const result = await api.del<{ deleted: boolean; bookmarksUncategorized: number }>(
-      `/categories/${id}`,
+      `/api/categories/${id}`,
     );
     categories.value = categories.value.filter((c) => c.id !== id);
     uncategorizedCount.value += result.bookmarksUncategorized;

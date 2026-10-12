@@ -84,13 +84,13 @@ export function useBookmarkActions() {
 
   return {
     setCategory: (id: string, categoryId: string | null) =>
-      unwrap(api.patch<{ bookmark: Bookmark }>(`/bookmarks/${id}/category`, { categoryId })),
+      unwrap(api.patch<{ bookmark: Bookmark }>(`/api/bookmarks/${id}/category`, { categoryId })),
     acceptSuggestion: (id: string) =>
-      unwrap(api.post<{ bookmark: Bookmark }>(`/bookmarks/${id}/suggestion/accept`)),
+      unwrap(api.post<{ bookmark: Bookmark }>(`/api/bookmarks/${id}/suggestion/accept`)),
     rejectSuggestion: (id: string) =>
-      unwrap(api.post<{ bookmark: Bookmark }>(`/bookmarks/${id}/suggestion/reject`)),
+      unwrap(api.post<{ bookmark: Bookmark }>(`/api/bookmarks/${id}/suggestion/reject`)),
     updateNotes: (id: string, notes: string) =>
-      unwrap(api.patch<{ bookmark: Bookmark }>(`/bookmarks/${id}/notes`, { notes })),
-    remove: (id: string) => api.del<{ deleted: boolean }>(`/bookmarks/${id}`),
+      unwrap(api.patch<{ bookmark: Bookmark }>(`/api/bookmarks/${id}/notes`, { notes })),
+    remove: (id: string) => api.del<{ deleted: boolean }>(`/api/bookmarks/${id}`),
   };
 }
