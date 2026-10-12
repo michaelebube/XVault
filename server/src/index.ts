@@ -31,6 +31,7 @@ async function main() {
 }
 
 main().catch((err) => {
-  logger.fatal({ err }, 'API failed to start');
+  logger.fatal({ err }, 'API failed to start',);
+  console.error("Error starting API:", err);
   process.exit(1);
 });
