@@ -86,7 +86,7 @@ export function useApi() {
   async function refreshSession(): Promise<boolean> {
     refreshInFlight ??= (async () => {
       try {
-        const result = await raw<AuthResponse>('/auth/refresh', {
+        const result = await raw<AuthResponse>('/api/auth/refresh', {
           method: 'POST',
           skipRefresh: true,
         });
