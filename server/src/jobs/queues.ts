@@ -1,4 +1,4 @@
-import { Queue, type JobsOptions } from 'bullmq';
+import { Queue, type JobsOptions, type JobState } from 'bullmq';
 import { createRedisConnection } from '../lib/redis.js';
 import { env } from '../config/env.js';
 import { childLogger } from '../lib/logger.js';
@@ -115,6 +115,35 @@ export function getAiQueue(): Queue<AiJobData> {
  */
 export const scheduleIdFor = (userId: string) => `scrape-${userId}`;
 
+/** Deterministic per-user id for an on-demand scrape. Colon-free, see above. */
+export const scrapeJobIdFor = (userId: string) => `scrape-now-${userId}`;
+
+/** `getState()` reports 'unknown' for a job hash that belongs to no known list. */
+type ExistingJobState = JobState | 'unknown';
+
+/**
+ * States in which a scrape for this user is already queued or running, so a
+ * second enqueue would only create a duplicate.
+ */
+const IN_FLIGHT_STATES: ReadonlySet<ExistingJobState> = new Set<ExistingJobState>([
+  'waiting',
+  'active',
+  'delayed',
+  'prioritized',
+  'waiting-children',
+]);
+
+/**
+ * States that are finished. A *retained* finished job (see `removeOnComplete` /
+ * `removeOnFail` above) is still stored under its id, and BullMQ's `add` is a
+ * no-op when the id already exists — so leaving one in place would silently
+ * swallow the next scrape the user asks for. It has to be removed first.
+ */
+const TERMINAL_STATES: ReadonlySet<ExistingJobState> = new Set<ExistingJobState>([
+  'failed',
+  'completed',
+]);
+
 /**
  * Enqueue a scrape now.
  *
@@ -124,17 +153,74 @@ export const scheduleIdFor = (userId: string) => `scrape-${userId}`;
  * the case where a worker died holding the lock. Belt and braces, because two
  * concurrent Playwright sessions on one X account is a good way to get that
  * account rate-limited.
+ *
+ * The id is only a guard if we look before adding. Because retained
+ * completed/failed jobs keep occupying that id, `add` alone would either
+ * duplicate nothing *or* silently do nothing depending on the leftover state —
+ * so we read the existing job, skip it while it is in flight, and clear it when
+ * it is finished. Retry policy is untouched: retries are BullMQ's job within a
+ * single job, this only decides whether a *new* job is created.
  */
 export async function enqueueScrape(
   data: ScrapeJobData,
   options: JobsOptions = {},
 ): Promise<string | null> {
   const queue = getScrapeQueue();
+  const jobId = scrapeJobIdFor(data.userId);
+  /** State of a finished job we had to clear, so the enqueue log can explain the reuse. */
+  let replacedState: ExistingJobState | null = null;
+
+  const existing = await queue.getJob(jobId);
+  if (existing) {
+    const existingState = await existing.getState();
+
+    if (IN_FLIGHT_STATES.has(existingState)) {
+      log.info(
+        { userId: data.userId, trigger: data.trigger, jobId, existingState, created: false },
+        'scrape already queued for this user; not enqueuing a duplicate',
+      );
+      return existing.id ?? null;
+    }
+
+    if (TERMINAL_STATES.has(existingState)) {
+      try {
+        await existing.remove();
+        replacedState = existingState;
+      } catch (err) {
+        // Lost the race: it was picked up (or its lock was taken) between the
+        // state read and the removal. That is exactly the in-flight case, so
+        // treat it as one rather than failing the request.
+        log.warn(
+          { userId: data.userId, jobId, existingState, created: false, err },
+          'could not remove finished scrape job; leaving it in place',
+        );
+        return existing.id ?? null;
+      }
+    } else {
+      // `unknown`: the job hash exists but it is in no list we recognise.
+      // Re-adding would be a no-op, so report what we found instead of lying.
+      log.warn(
+        { userId: data.userId, jobId, existingState, created: false },
+        'scrape job exists in an unexpected state; not enqueuing',
+      );
+      return existing.id ?? null;
+    }
+  }
+
   const job = await queue.add('scrape', data, {
-    jobId: `scrape-now-${data.userId}`,
+    jobId,
     ...options,
   });
-  log.info({ userId: data.userId, trigger: data.trigger, jobId: job.id }, 'scrape enqueued');
+  log.info(
+    {
+      userId: data.userId,
+      trigger: data.trigger,
+      jobId: job.id,
+      created: true,
+      replacedState,
+    },
+    'scrape enqueued',
+  );
   return job.id ?? null;
 }
 
